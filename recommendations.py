@@ -30,22 +30,20 @@ users = test.user.unique()
 
 
 def getRecommendations(user):
-    """
-    Generate a recommendation for the user
-    :param algo: the given algorithm
-    :param model: the given trained model
-    :param user: the user
-    :return: recommendation
-    """
+    '''
+    Return a recommendation
+    :param user:
+    :return:
+    '''
     # Generate $nb_recommendations for the givenuser
     nb_recommendations = 1
     recs = batch.recommend(algo, model, users, nb_recommendations, topn.UnratedCandidates(train))
     return recs[recs['user'] == user]
 
+
+# Only for test purpose
 user = np.array(users[0])
 rec = getRecommendations(user)
-
-
 # select columns
 recColumns = rec[['item', 'score']]
 # select row (normally not needed)
