@@ -112,9 +112,13 @@ paths:
           schema:
             type: object
             properties:
-              fname:
+              user_id:
+                type: integer
+              age:
+                type: integer
+              sex:
                 type: string
-              lname:
+              job:
                 type: string
       responses:
         200:

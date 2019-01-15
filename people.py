@@ -5,8 +5,24 @@ from flask import make_response, abort
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
 
+def invent_zip():
+    return 12345
+
 PEOPLE = pd.read_csv('ml-100k/u.user', sep='|',
-        names=['user', 'age', 'sex', 'job', 'timestamp'])
+        names=['user', 'age', 'sex', 'job', 'zip'])
+
+def set_people(df):
+    """
+    This function set the value of PEOPLE
+    :param df: the new dataframe
+    :return: Nothing
+    """
+    global PEOPLE
+    PEOPLE = df
+
+def get_people():
+    global PEOPLE
+    return PEOPLE
 
 
 
@@ -17,6 +33,7 @@ def read_all(length=None, offset=0 ):
     with the complete lists of people
     :return:        json string of list of people
     """
+    PEOPLE = get_people()
     if length == None:
         length = len(PEOPLE)
     if not PEOPLE.empty:
@@ -47,6 +64,7 @@ def read_one(user_id):
     :param user_id:   id of user
     :return:        person matching last name
     """
+    PEOPLE = get_people()
     # Does the person exist in people?
     person = PEOPLE[PEOPLE['user'] == user_id]
     if not person.empty:
@@ -76,18 +94,20 @@ def create(person):
     :param person:  person to create in people structure
     :return:        201 on success, 406 on person exists
     """
-    print(person)
     user_id = int(person.get("user", None))
     age = int(person.get("age", None))
     sex = person.get("sex", None)
     job = person.get("job", None)
+    zip = invent_zip()
 
-
+    PEOPLE = get_people()
     # Does the person exist already?
     person = PEOPLE[PEOPLE['user'] == user_id]
     if person.empty:
-        dfNew = pd.DataFrame([user_id, age, sex, job, get_timestamp()], columns=['user', 'age', 'sex', 'job', 'timestamp'])
-        PEOPLE.append(dfNew)
+        dfNew = pd.DataFrame(columns=['user', 'age', 'sex', 'job', 'zip'])
+        dfNew.loc[0] = [user_id, age, sex, job, zip]
+        result = pd.concat([PEOPLE, dfNew])
+        set_people(result)
         return make_response(
             "user {user_id} successfully created".format(user_id=user_id), 201
         )
@@ -121,6 +141,7 @@ def update(user_id, person):
 
 
 def delete(user_id):
+    # todo
     """
     This function deletes a person from the people structure
     :param lname:   last name of person to delete
@@ -153,4 +174,10 @@ def read():
     # Create the list of people from our data
     return [PEOPLE[key] for key in sorted(PEOPLE.keys())]
 
-read_all(9,20)
+person_test = {
+    "user": 955,
+    "age": 2,
+    "sex":"M",
+    "job": "engineer"
+}
+# create(person_test)

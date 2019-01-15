@@ -31,6 +31,7 @@ modelFunk = algoFunk.train(train)
 users = test.user.unique()
 
 
+
 def get_recommendations_Funk_SVD(user_id, nb_recommendations = 1):
     '''
     Return a recommendation

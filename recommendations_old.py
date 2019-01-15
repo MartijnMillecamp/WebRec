@@ -65,3 +65,7 @@ score = rowSeries.values[1]
 print(item)
 print(score)
 print(type(item))
+# BiasMFModel(uidx, iidx, basic.BiasModel(bias.mean, ibias, ubias),
+#                            model.user_features, model.item_features)
+# BiasMFModel( users, items, bias, umat, imat)
+print(len(modelFunk))
