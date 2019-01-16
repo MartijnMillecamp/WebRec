@@ -67,3 +67,5 @@ fabric.properties
 \.idea/misc\.xml
 
 __pycache__/
+
+\.idea/
