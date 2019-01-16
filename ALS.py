@@ -66,6 +66,7 @@ print(recs)
 
 # Get the first recommended item
 firstRec = recs.iloc[0, 0]
+firstRecScore = recs.iloc[0, 1]
 print(firstRec)
 
 # Get the explanation of the recommendation
@@ -78,8 +79,23 @@ userProfile = modelAls.user_features_[0]
 itemProfile = modelAls.item_features_[indexFirstRec]
 print(userProfile)
 print(itemProfile)
-print(np.dot(userProfile, itemProfile))
-
+# Get the MF score of item and user
+mfScore = np.dot(userProfile, itemProfile)
+print(mfScore)
+# Get global bias
+globalBias = modelAls.global_bias_
+print(globalBias)
+# Get bias of user
+userBias = modelAls.user_bias_[0]
+print(userBias)
+# Get bias of item
+itemBias = modelAls.item_bias_[indexFirstRec]
+print(itemBias)
+# Get total score
+total = globalBias + userBias + itemBias + mfScore
+print(total)
+# As you can see, this is the same as the calculated score
+print(firstRecScore)
 
 
 
