@@ -15,9 +15,27 @@ To test the API, you can follow next steps:
 
 1) Download this code
 
-2) Install 
+2) Install Flask and install connexion
 
-2) Run app.py
+3) Run app.py
+
+4) Go to localhost:5000/ui
+
+5) Test the API
+
+**File Structure**
+
+**App.py** is the controller of this code, it starts the server and connects to the swagger file
+
+**swagger.yml** describes the API and configures the endpoints of the server
+    For each operation id (e.g. operationId: rating.ratings_user) there needs to be
+    an according file (rating.py) with corresponding function (ratings_user) that has the same
+    parameters as described in the parameters section (e.g. user_id)
+    
+**recommendation.py** is the file that creates the recommendations. In this case, 
+it uses the Lenskit package and the Movielens dataset to generate recommendations. In case
+you have your own back end, you need to change this file.
+
 
 
 

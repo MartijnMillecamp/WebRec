@@ -1,9 +1,7 @@
 # credits to https://realpython.com/flask-connexion-rest-api/
 
-# from flask import Flask
-# from flask import request, jsonify
-from flask import make_response, render_template
-# from flask_restful import Resource, Api, reqparse
+
+from flask import render_template
 import connexion
 
 
