@@ -1,15 +1,13 @@
 # credits to https://realpython.com/flask-connexion-rest-api/
 
-from flask import Flask
-from flask import request, jsonify
+# from flask import Flask
+# from flask import request, jsonify
 from flask import make_response, render_template
-from flask_restful import Resource, Api, reqparse
+# from flask_restful import Resource, Api, reqparse
 import connexion
-# import recommendations
-# import ratings
-import numpy as np
 
-#
+
+
 
 # Create the application instance
 app = connexion.App(__name__, specification_dir='./')

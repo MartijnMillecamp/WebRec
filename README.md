@@ -7,6 +7,24 @@ The purpose of this code is to provide
 a REST-ful API on top of the Lenskit
 package. 
 
+**_Local verson_**
+
+**Get started**
+
+To test the API, you can follow next steps:
+
+1) Download this code
+
+2) Install 
+
+2) Run app.py
+
+
+
+
+
+**_Deployment_**
+
 We used docker to wrap up the code
 and its dependencies into a container.
 The reason for this wrapping is to enable

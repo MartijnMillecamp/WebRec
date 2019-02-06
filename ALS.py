@@ -50,14 +50,16 @@ print(users.size)
 # See that the users are ranked differently in the matrix
 print(modelAls.user_index_[0:10])
 first = modelAls.user_index_[0]
+print(type(first))
 firstUser = np.array([first], np.int64)
 
 # Get recommendation for a user
 # As als.BiasedMF is not implementing Recommend
 # We need to first adapt the model
 # https://lkpy.lenskit.org/en/stable/interfaces.html#recommendation
-rec = Recommender.adapt(modelAls)
-# recs = rec.recommend(firstUser, 10) #Gives error
+# rec = Recommender.adapt(modelAls)
+# recs = rec.recommend(first, 10) #Gives error
+
 
 # Get 10 recommendations for a user (pandas dataframe)
 recs = batch.recommend(modelAls, firstUser,
@@ -96,6 +98,7 @@ total = globalBias + userBias + itemBias + mfScore
 print(total)
 # As you can see, this is the same as the calculated score
 print(firstRecScore)
+
 
 
 
